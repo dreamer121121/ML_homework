@@ -20,7 +20,7 @@ def Perter(request):
     # parser.add_argument('--test_dir', default='../Market/pytorc', type=str, help='./test_data')
     # opts = parser.parse_args()
 
-    data_dir = 'home/gwang/Market/pytorch'
+    data_dir = '/home/gwang/Market/pytorch'
     image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x)) for x in ['gallery', 'query']}
 
     #####################################################################
