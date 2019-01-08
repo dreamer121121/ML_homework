@@ -10,8 +10,11 @@ import matplotlib
 matplotlib.use('agg')
 import matplotlib.pyplot as plt
 
-def Perter(request):
 
+def Perter(request):
+    query = request.GET.get("q")
+    if not query:
+        query = 777
     print("----start-----")
     #######################################################################
     # Evaluate
@@ -80,7 +83,7 @@ def Perter(request):
         index = index[mask]
         return index
 
-    i = int(777)
+    i = int(query)
     index = sort_img(query_feature[i], query_label[i], query_cam[i], gallery_feature, gallery_label, gallery_cam)
 
     ########################################################################
@@ -88,6 +91,7 @@ def Perter(request):
 
     query_path, _ = image_datasets['query'].imgs[i]
     query_label = query_label[i]
+    imgs = []
     print(query_path)
     print('Top 10 images are as follow:')
     try:  # Visualize Ranking Result
@@ -106,7 +110,9 @@ def Perter(request):
                 ax.set_title('%d' % (i + 1), color='green')
             else:
                 ax.set_title('%d' % (i + 1), color='red')
+            imgs.append(img_path)
             print(img_path)
+        return JsonResponse({'result': result})
     except RuntimeError:
         for i in range(10):
             img_path = image_datasets.imgs[index[i]]
