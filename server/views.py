@@ -15,12 +15,12 @@ def Perter(request):
     print("----start-----")
     #######################################################################
     # Evaluate
-    parser = argparse.ArgumentParser(description='Demo')
-    parser.add_argument('--query_index', default=777, type=int, help='test_image_index')
-    parser.add_argument('--test_dir', default='../Market/pytorc', type=str, help='./test_data')
-    opts = parser.parse_args()
+    # parser = argparse.ArgumentParser(description='Demo')
+    # parser.add_argument('--query_index', default=777, type=int, help='test_image_index')
+    # parser.add_argument('--test_dir', default='../Market/pytorc', type=str, help='./test_data')
+    # opts = parser.parse_args()
 
-    data_dir = opts.test_dir
+    data_dir = '../Market/pytorch'
     image_datasets = {x: datasets.ImageFolder(os.path.join(data_dir, x)) for x in ['gallery', 'query']}
 
     #####################################################################
@@ -80,7 +80,7 @@ def Perter(request):
         index = index[mask]
         return index
 
-    i = opts.query_index
+    i = int(777)
     index = sort_img(query_feature[i], query_label[i], query_cam[i], gallery_feature, gallery_label, gallery_cam)
 
     ########################################################################
