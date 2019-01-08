@@ -10,6 +10,29 @@ import matplotlib
 matplotlib.use('agg')
 import matplotlib.pyplot as plt
 
+def success_msg(msg_detail=None):
+    """"
+    构造一个用于返回页面成功的消息
+
+    """
+    r={'result':'successs'}
+
+    if msg_detail:
+        r['detail']=msg_detail
+    else:
+        r['detail']={}
+
+    return r
+
+def json_response(msg, ensure_ascii=False):
+    """
+    给django的JsonResponse增加中文编码支持
+    :param ensure_ascii:
+    :param msg:
+    :return:
+    """
+    dumps_params = {'ensure_ascii': ensure_ascii}
+    return JsonResponse(msg, json_dumps_params=dumps_params)
 
 def Perter(request):
     query = request.GET.get("q")
@@ -112,7 +135,7 @@ def Perter(request):
                 ax.set_title('%d' % (i + 1), color='red')
             imgs.append(img_path)
             print(img_path)
-        return JsonResponse({'result': result})
+        return json_response(success_msg(imgs))
     except RuntimeError:
         for i in range(10):
             img_path = image_datasets.imgs[index[i]]
