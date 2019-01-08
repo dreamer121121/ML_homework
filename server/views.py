@@ -1,16 +1,18 @@
 from django.http import JsonResponse
+import argparse
+import scipy.io
+import torch
+import numpy as np
+import os
+from torchvision import datasets
+import matplotlib
 
+matplotlib.use('agg')
+import matplotlib.pyplot as plt
 
 def Perter(request):
-    import argparse
-    import scipy.io
-    import torch
-    import numpy as np
-    import os
-    from torchvision import datasets
-    import matplotlib
-    matplotlib.use('agg')
-    import matplotlib.pyplot as plt
+
+    print("----start-----")
     #######################################################################
     # Evaluate
     parser = argparse.ArgumentParser(description='Demo')
